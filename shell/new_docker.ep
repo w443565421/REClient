@@ -1,0 +1,51 @@
+#!/usr/bin/expect
+
+set timeout -1
+set prompt "(%|#|\\$) $"
+set servername [lindex $argv 0]
+set password [lindex $argv 1]
+set ipaddress [lindex $argv 2]
+set username [lindex $argv 3]
+set portnum [lindex $argv 4]
+
+set display [expr {$portnum - 5900}]
+puts "$display"
+
+set image_name "gstar:osg"
+spawn ssh $servername@$ipaddress
+
+expect {
+	"no)?" {
+		send "yes\r"
+		expect "word:"
+		send "$password\r"
+	}
+	"word:" {
+		send "$password\r"
+	}
+}
+
+expect {
+	"$" {
+		send "sudo nvidia-docker run -d --name $username -v /etc/localtime:/etc/localtime:ro -e DISPLAY=unix:0 -v /tmp/.X11-unix:/tmp/.X11-unix -v /home/$servername/$username:/root/Desktop/$username -p $portnum:$portnum $image_name bash -c \"ldconfig;vnclicense -add BQ24G-PDXE4-KKKRS-WBHZE-F5RCA;vncserver :$display -geometry 1366x768;/usr/sbin/sshd -D\"\r"
+
+		expect "$servername:"
+		send "$password\r"
+	}
+	"#" {
+		send "sudo nvidia-docker run -d --name $username -v /etc/localtime:/etc/localtime:ro -e DISPLAY=unix:0 -v /tmp/.X11-unix:/tmp/.X11-unix -v /home/$servername/$username:/root/Desktop/$username -p $portnum:$portnum $image_name bash -c \"ldconfig;vnclicense -add BQ24G-PDXE4-KKKRS-WBHZE-F5RCA;vncserver :$display -geometry 1366x768;/usr/sbin/sshd -D\"\r"
+	}
+}
+
+while true {
+	expect {
+		-re $prompt {
+			send "exit\r"
+		}
+		"closed." {
+			break
+		}
+	}
+}
+
+interact

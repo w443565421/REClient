@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd /tmp/ #到/tmp/目录下
+expect upload_file.ep $1 $2 $3 $4 $5 #执行upload_file指令
+exit
+
+

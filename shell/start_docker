@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd /tmp/ #到/tmp/目录下
+expect start_docker.ep $1 $2 $3 $4 $5 #执行打开容器指令
+sleep 2s
+vncviewer -FullScreen $3:$5 1>/dev/null
+expect change_ownership.ep $1 $2 $3 $4 #执行修改权限指令
+exit
+

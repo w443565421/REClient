@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>res/uploadAndRender.png</file>
+        <file>res/render.png</file>
+        <file>res/logo2.png</file>
+        <file>res/logo.png</file>
+    </qresource>
+    <qresource prefix="/shell">
+        <file>shell/upload_file.ep</file>
+        <file>shell/upload_file_spawn</file>
+        <file>shell/upload_file</file>
+        <file>shell/stop_docker.ep</file>
+        <file>shell/stop_docker</file>
+        <file>shell/start_temp_docker.ep</file>
+        <file>shell/start_docker.ep</file>
+        <file>shell/start_docker</file>
+        <file>shell/scp_file.ep</file>
+        <file>shell/scp</file>
+        <file>shell/reset_docker</file>
+        <file>shell/new_docker.ep</file>
+        <file>shell/new_docker</file>
+        <file>shell/make_docker.ep</file>
+        <file>shell/make_docker</file>
+        <file>shell/download_file.ep</file>
+        <file>shell/download_file_spawn</file>
+        <file>shell/download_file</file>
+        <file>shell/delete_docker.ep</file>
+        <file>shell/change_ownership.ep</file>
+    </qresource>
+</RCC>
